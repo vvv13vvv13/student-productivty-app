@@ -23,7 +23,7 @@ function MenuItem({ icon, label, href }: MenuItemProps) {
 export default function Home() {
   return (
     <div className="container">
-      <h1 className="title">PRODUCTY</h1>
+      <h1 className="title">PRODUCTYyyy</h1>
 
       <nav className="menu">
         <MenuItem icon={<FaTasks size={30} />} label="Taskuri" href="/taskuri" />
@@ -39,3 +39,5 @@ export default function Home() {
     </div>
   );
 }
+
+
