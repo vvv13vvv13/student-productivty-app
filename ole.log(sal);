@@ -1,0 +1,30 @@
+[33mcommit 8c669a9a1fd97586acac2c2dcc6b35233f22e58f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: vvv13vvv13 <vladimir.lipanescu@gmail.com>
+Date:   Tue Nov 18 21:46:28 2025 +0200
+
+    test2
+
+[33mcommit deb7f879ee2cecabf0d0486b371e2e8260a97a78[m
+Author: vvv13vvv13 <vladimir.lipanescu@gmail.com>
+Date:   Tue Nov 18 21:40:14 2025 +0200
+
+    test
+
+[33mcommit e2bdc5dae89f599230489a085c4322cdb27a80b0[m
+Merge: 956ac58 6aca501
+Author: vvv13vvv13 <vladimir.lipanescu@gmail.com>
+Date:   Tue Nov 18 21:31:26 2025 +0200
+
+    Adaug paginile taskuri, calendar, progres și context
+
+[33mcommit 956ac58704cd920603940e9a296569c88dd9ec54[m
+Author: vvv13vvv13 <vladimir.lipanescu@gmail.com>
+Date:   Mon Nov 17 18:28:30 2025 +0200
+
+    Initial commit with Next.js setup
+
+[33mcommit 6aca501c91ec28c8d4cf94698aa58d8cb8712c7f[m
+Author: vvv13vvv13 <vladimir.lipanescu@gmail.com>
+Date:   Mon Nov 17 18:18:05 2025 +0200
+
+    Initial commit
