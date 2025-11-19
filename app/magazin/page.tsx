@@ -1,6 +1,7 @@
-'use client';
+ 'use client';
 
 import { useEffect, useState } from 'react';
+import BackButton from '../components/BackButton';
 
 const SHOP_ITEMS = [
   { key: 'theme', name: 'Teme exclusive', cost: 100, desc: 'Deblochează teme de culoare speciale pentru aplicație.' },
@@ -39,6 +40,7 @@ export default function MagazinPage() {
   return (
     <div className="container">
       <h1 className="title">Magazin</h1>
+      <BackButton />
       <div style={{ fontSize: 24, marginBottom: 32, color: 'var(--accent)' }}>
         Puncte disponibile: <b>{points}</b>
       </div>

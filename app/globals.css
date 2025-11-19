@@ -46,6 +46,7 @@ body {
   justify-content: center;
   background: var(--main-gradient);
   animation: fadeIn 1s ease-in-out;
+  position: relative;
 }
 
 /* Titlu principal */
@@ -218,6 +219,21 @@ body {
 .back-container {
   text-align: left;
   margin: 20px 0;
+}
+
+/* Position helpers for back button */
+.back-top-left {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  margin: 0;
+}
+
+.back-bottom-left {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  margin: 0;
 }
 
 .back-button {

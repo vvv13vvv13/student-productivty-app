@@ -1,6 +1,6 @@
-'use client';
+ 'use client';
 
-import Link from 'next/link';
+import BackButton from '../components/BackButton';
 import { useTasks } from '../context/TaskContext';
 
 export default function ProgresPage() {
@@ -10,11 +10,7 @@ export default function ProgresPage() {
     <div className="progres-container">
       <h1 className="progres-title">Progres</h1>
 
-      <div className="back-container">
-        <Link href="/" className="back-button">
-          ← Back to Main
-        </Link>
-      </div>
+      <BackButton label="← Back to Main" />
 
       <h2 className="progres-subtitle">Taskuri completate:</h2>
       {completedTasks.length > 0 ? (

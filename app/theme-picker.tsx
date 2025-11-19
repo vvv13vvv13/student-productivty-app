@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import Link from 'next/link';
+import BackButton from './components/BackButton';
 
 const themes = [
 	{
@@ -98,11 +98,7 @@ export default function ThemePicker() {
 	return (
 		<div className="container">
 			<h1 className="title">Personalizare temă</h1>
-			<div className="back-container">
-				<Link href="/" className="back-button">
-					← Înapoi
-				</Link>
-			</div>
+			<BackButton />
 			<div
 				style={{
 					display: 'flex',

@@ -1,5 +1,5 @@
-'use client';
-import Link from 'next/link';
+ 'use client';
+import BackButton from '../components/BackButton';
 import { useState } from 'react';
 import { useTasks } from '../context/TaskContext';
 
@@ -16,11 +16,7 @@ export default function TaskuriPage() {
     <div className="container">
       <h1 className="title">Taskuri</h1>
 
-      <div className="back-container">
-        <Link href="/" className="back-button">
-          ← Inapoi
-        </Link>
-      </div>
+      <BackButton />
 
       <div className="task-form">
         <input

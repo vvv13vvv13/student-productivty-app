@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import BackButton from '../components/BackButton';
 
 // Simplu: datele se stochează în localStorage (nu e pentru producție)
 export default function LoginPage() {
@@ -40,11 +40,7 @@ export default function LoginPage() {
   return (
     <div className="container">
       <h1 className="title">{isRegister ? 'Creează cont' : 'Log in'}</h1>
-      <div className="back-container">
-        <Link href="/" className="back-button">
-          ← Înapoi
-        </Link>
-      </div>
+      <BackButton />
       <div className="task-form" style={{ flexDirection: 'column', maxWidth: 350, margin: '0 auto' }}>
         <input
           className="task-input"

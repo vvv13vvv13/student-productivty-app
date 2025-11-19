@@ -1,6 +1,7 @@
-'use client';
+ 'use client';
 
 import { useEffect, useState } from 'react';
+import BackButton from '../components/BackButton';
 
 export default function PunctePage() {
   const [points, setPoints] = useState(0);
@@ -13,6 +14,7 @@ export default function PunctePage() {
   return (
     <div className="container">
       <h1 className="title">Punctele tale</h1>
+      <BackButton />
       <div style={{ fontSize: 48, fontWeight: 700, color: 'var(--accent)', margin: '40px 0' }}>
         {points} ⭐
       </div>

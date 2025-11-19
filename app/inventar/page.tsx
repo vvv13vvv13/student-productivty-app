@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import BackButton from '../components/BackButton';
 
 const SHOP_ITEMS = [
   { key: 'theme', name: 'Teme exclusive', desc: 'Teme de culoare speciale pentru aplicație.' },
@@ -26,6 +27,7 @@ export default function InventarPage() {
   return (
     <div className="container">
       <h1 className="title">Inventar</h1>
+      <BackButton />
       <div style={{ margin: '32px 0', fontSize: 20 }}>
         {owned.length === 0 ? (
           <div>Nu ai cumpărat încă nimic din magazin.</div>
