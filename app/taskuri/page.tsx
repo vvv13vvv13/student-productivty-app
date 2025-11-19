@@ -5,7 +5,11 @@ import { useTasks } from '../context/TaskContext';
 
 export default function TaskuriPage() {
   const [task, setTask] = useState('');
-  const { tasks, addTask, toggleTask, deleteTask } = useTasks();
+  const { tasks, addTask, toggleTask, deleteTask, moveTaskToCompleted } = useTasks();
+
+  const handleTaskCompletion = (index: number) => {
+    moveTaskToCompleted(index); // Move the task to completedTasks
+  };
 
   return (
     <div className="container">
@@ -40,7 +44,7 @@ export default function TaskuriPage() {
               <input
                 type="checkbox"
                 checked={t.completed}
-                onChange={() => toggleTask(i)}
+                onChange={() => handleTaskCompletion(i)}
               />
               <span>{t.text}</span>
             </label>

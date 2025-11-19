@@ -1,6 +1,6 @@
 'use client';
 
-import { FaTasks, FaCalendarAlt, FaChartBar, FaClock, FaCheckCircle, FaSignInAlt, FaStar, FaStore, FaBook } from 'react-icons/fa';
+import { FaTasks, FaCalendarAlt, FaChartBar, FaClock, FaCheckCircle, FaSignInAlt, FaStar, FaStore, FaBook, FaPalette } from 'react-icons/fa';
 import Link from 'next/link';
 
 type MenuItemProps = {
@@ -30,11 +30,12 @@ export default function Home() {
         <MenuItem icon={<FaCalendarAlt size={30} />} label="Calendar" href="/calendar" />
         <MenuItem icon={<FaChartBar size={30} />} label="Progres" href="/progres" />
         <MenuItem icon={<FaClock size={30} />} label="Orar" href="/orar" />
-        <MenuItem icon={<FaCheckCircle size={30} />} label="Taskuri completate" href="/taskuri-completate" />
+        <MenuItem icon={<FaCheckCircle size={30} />} label="Inventar" href="/inventar" />
         <MenuItem icon={<FaSignInAlt size={30} />} label="Log in" href="/login" />
         <MenuItem icon={<FaStar size={30} />} label="Puncte" href="/puncte" />
         <MenuItem icon={<FaStore size={30} />} label="Magazin" href="/magazin" />
         <MenuItem icon={<FaBook size={30} />} label="Materiale de curs" href="/materiale" />
+        <MenuItem icon={<FaPalette size={30} />} label="Personalizare" href="/theme-picker" />
       </nav>
     </div>
   );
