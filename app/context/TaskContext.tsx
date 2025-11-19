@@ -2,14 +2,14 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 
-type Task = { text: string; completed: boolean };
+type Task = { text: string; completed: boolean; deadline?: string };
 type TaskContextType = {
   tasks: Task[];
-  completedTasks: Task[]; // Added completedTasks
-  addTask: (text: string) => void;
+  completedTasks: Task[];
+  addTask: (text: string, deadline?: string) => void;
   toggleTask: (index: number) => void;
   deleteTask: (index: number) => void;
-  moveTaskToCompleted: (index: number) => void; // Added function to move tasks
+  moveTaskToCompleted: (index: number) => void;
 };
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -30,7 +30,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('producty-completed-tasks', JSON.stringify(completedTasks));
   }, [tasks, completedTasks]);
 
-  const addTask = (text: string) => setTasks([...tasks, { text, completed: false }]);
+  const addTask = (text: string, deadline?: string) => setTasks([...tasks, { text, completed: false, deadline }]);
   const toggleTask = (index: number) => {
     const updated = [...tasks];
     updated[index].completed = !updated[index].completed;
