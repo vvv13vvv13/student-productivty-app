@@ -1,6 +1,6 @@
 'Plan de punere în producție — student-productivty-app'
 
-Autor: vvv13vvv13
+Autor: vvv13vvv13 (radugoje313@gmail.com)
 Data: 18 Decembrie 2025
 
 1. Scop
@@ -47,8 +47,5 @@ npx vercel --prod         # deploy în production
 8. Backup & date
 - Datele aplicatiei (puncte, owned items, user) sunt salvate în `localStorage` — nu există DB în acest prototip.
 
-9. Contact & Responsabilități
-- Autor / contact: vvv13vvv13 (adăugați email)
-
-10. Notă finală
+9. Notă finală
 Acest document e conceput să fie scurt și clar — în cazul unui deploy real la scară, ar trebui să adăugați monitorizare, backup DB, CI/CD testare automată și proceduri de securitate pentru secrete.
