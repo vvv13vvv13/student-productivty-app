@@ -111,9 +111,4 @@ Adaugă aici licența proiectului (ex: MIT).
 
 ---
 
-Dacă vrei, pot:  
-- adăuga secțiune „FAQ” cu întrebări frecvente,  
-- include instrucțiuni de deploy pe Vercel,  
-- scrie ghid de debugging mai detaliat.
 
-Spune ce preferi și actualizez README în consecință. 🙌
