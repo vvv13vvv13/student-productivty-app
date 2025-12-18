@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@next/font": "^14.2.15",
-    "next": "16.0.3",
+    "next": "^16.1.0",
     "react": "19.2.0",
     "react-calendar": "^6.0.0",
     "react-dom": "19.2.0",
@@ -22,7 +22,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.0.3",
+    "eslint-config-next": "^16.1.0",
+    "markdown-pdf": "^11.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
