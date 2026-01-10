@@ -106,4 +106,5 @@ app.post('/api/login', (req, res) => {
   res.json({ success: true, username });
 });
 
-app.listen(4000, () => console.log('Backend pornit pe http://localhost:4000'));
+const port = process.env.PORT || 4000;
+app.listen(port, () => console.log(`Backend pornit pe portul ${port}`));
