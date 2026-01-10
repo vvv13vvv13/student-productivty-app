@@ -18,37 +18,47 @@ export default function LoginPage() {
     }
   }, []);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!username || !password) {
       setMessage('Completează toate câmpurile!');
       return;
     }
-    const users = JSON.parse(localStorage.getItem('producty-users') || '{}');
-    if (users[username]) {
-      setMessage('Acest utilizator există deja!');
-      return;
+    try {
+      const res = await fetch('http://localhost:4000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setMessage(data.error || 'Eroare la înregistrare');
+        return;
+      }
+      setMessage('Cont creat cu succes! Te poți loga.');
+      setIsRegister(false);
+    } catch (err) {
+      setMessage('Eroare de rețea!');
     }
-    users[username] = { password, data: { tasks: [], materials: [], activity: [] } };
-    localStorage.setItem('producty-users', JSON.stringify(users));
-    setMessage('Cont creat cu succes! Te poți loga.');
-    setIsRegister(false);
   };
 
-  const handleLogin = () => {
-    const users = JSON.parse(localStorage.getItem('producty-users') || '{}');
-    if (users[username] && users[username].password === password) {
+  const handleLogin = async () => {
+    try {
+      const res = await fetch('http://localhost:4000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setMessage(data.error || 'Date incorecte!');
+        return;
+      }
+      // Salvează userul logat local doar pentru sesiune
       localStorage.setItem('producty-current-user', username);
-      // Marchează loginul și ora de început sesiune
-      const now = new Date().toISOString();
-      if (!users[username].activity) users[username].activity = [];
-      users[username].activity.push({ type: 'login', time: now });
-      users[username].lastLogin = now;
-      users[username].sessionStart = Date.now();
-      localStorage.setItem('producty-users', JSON.stringify(users));
       setMessage('Logare reușită!');
       window.location.reload();
-    } else {
-      setMessage('Date incorecte!');
+    } catch (err) {
+      setMessage('Eroare de rețea!');
     }
   };
 

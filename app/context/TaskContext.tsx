@@ -18,30 +18,42 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [completedTasks, setCompletedTasks] = useState<Task[]>([]); // State for completed tasks
 
-  // Încarcă taskurile userului logat
+  // Încarcă taskurile userului logat din backend
   useEffect(() => {
     const currentUser = localStorage.getItem('producty-current-user');
-    const users = JSON.parse(localStorage.getItem('producty-users') || '{}');
-    if (currentUser && users[currentUser]) {
-      const userData = users[currentUser].data || {};
-      setTasks(userData.tasks || []);
-      setCompletedTasks(userData.completedTasks || []);
-    } else {
+    if (!currentUser) {
       setTasks([]);
       setCompletedTasks([]);
+      return;
     }
+    fetch(`http://localhost:4000/api/tasks?username=${encodeURIComponent(currentUser)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.tasks) {
+          // Separăm taskurile în active și completed
+          setTasks(data.tasks.filter((t: any) => !t.completed));
+          setCompletedTasks(data.tasks.filter((t: any) => t.completed));
+        } else {
+          setTasks([]);
+          setCompletedTasks([]);
+        }
+      })
+      .catch(() => {
+        setTasks([]);
+        setCompletedTasks([]);
+      });
   }, []);
 
-  // Salvează taskurile userului logat
+  // Salvează taskurile userului logat în backend
   useEffect(() => {
     const currentUser = localStorage.getItem('producty-current-user');
-    const users = JSON.parse(localStorage.getItem('producty-users') || '{}');
-    if (currentUser && users[currentUser]) {
-      users[currentUser].data = users[currentUser].data || {};
-      users[currentUser].data.tasks = tasks;
-      users[currentUser].data.completedTasks = completedTasks;
-      localStorage.setItem('producty-users', JSON.stringify(users));
-    }
+    if (!currentUser) return;
+    const allTasks = [...tasks, ...completedTasks];
+    fetch('http://localhost:4000/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: currentUser, tasks: allTasks })
+    });
   }, [tasks, completedTasks]);
 
   const addTask = (text: string, deadline?: string) => setTasks([...tasks, { text, completed: false, deadline }]);

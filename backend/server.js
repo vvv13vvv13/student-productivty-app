@@ -1,4 +1,4 @@
-// ...existing code...
+
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
@@ -14,6 +14,42 @@ function readUsers() {
 function writeUsers(users) {
   fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
 }
+
+// Dashboard: returnează toți userii și activitatea lor
+app.get('/api/dashboard', (req, res) => {
+  const users = readUsers();
+  // Pentru fiecare user, calculează durata totală a sesiunilor (dacă există activitate de tip login/logout)
+  const usersWithStats = users.map(u => {
+    let totalSessionTime = 0;
+    let lastLogin = null;
+    if (u.activity && Array.isArray(u.activity)) {
+      u.activity.forEach(act => {
+        if (act.type === 'login') {
+          lastLogin = new Date(act.time).getTime();
+        }
+        if (act.type === 'logout' && lastLogin) {
+          const logoutTime = new Date(act.time).getTime();
+          if (logoutTime > lastLogin) {
+            totalSessionTime += (logoutTime - lastLogin);
+            lastLogin = null;
+          }
+        }
+      });
+      // Dacă userul e încă logat, adaugă sesiunea curentă până acum
+      if (lastLogin) {
+        totalSessionTime += (Date.now() - lastLogin);
+      }
+    }
+    return {
+      username: u.username,
+      tasks: u.tasks || [],
+      activity: u.activity || [],
+      totalSessionTimeMs: totalSessionTime,
+      totalSessionTimeMinutes: Math.round(totalSessionTime / 60000)
+    };
+  });
+  res.json({ users: usersWithStats });
+});
 
 
 // Înregistrare

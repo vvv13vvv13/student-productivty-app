@@ -4,5 +4,17 @@
     "password": "admin",
     "tasks": [],
     "activity": []
+  },
+  {
+    "username": "vladimir",
+    "password": "vladimir1504",
+    "tasks": [
+      {
+        "text": "Proiect C#",
+        "completed": false,
+        "deadline": "2026-01-12"
+      }
+    ],
+    "activity": []
   }
 ]
