@@ -18,16 +18,30 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [completedTasks, setCompletedTasks] = useState<Task[]>([]); // State for completed tasks
 
+  // Încarcă taskurile userului logat
   useEffect(() => {
-    const saved = localStorage.getItem('producty-tasks');
-    const savedCompleted = localStorage.getItem('producty-completed-tasks');
-    if (saved) setTasks(JSON.parse(saved));
-    if (savedCompleted) setCompletedTasks(JSON.parse(savedCompleted));
+    const currentUser = localStorage.getItem('producty-current-user');
+    const users = JSON.parse(localStorage.getItem('producty-users') || '{}');
+    if (currentUser && users[currentUser]) {
+      const userData = users[currentUser].data || {};
+      setTasks(userData.tasks || []);
+      setCompletedTasks(userData.completedTasks || []);
+    } else {
+      setTasks([]);
+      setCompletedTasks([]);
+    }
   }, []);
 
+  // Salvează taskurile userului logat
   useEffect(() => {
-    localStorage.setItem('producty-tasks', JSON.stringify(tasks));
-    localStorage.setItem('producty-completed-tasks', JSON.stringify(completedTasks));
+    const currentUser = localStorage.getItem('producty-current-user');
+    const users = JSON.parse(localStorage.getItem('producty-users') || '{}');
+    if (currentUser && users[currentUser]) {
+      users[currentUser].data = users[currentUser].data || {};
+      users[currentUser].data.tasks = tasks;
+      users[currentUser].data.completedTasks = completedTasks;
+      localStorage.setItem('producty-users', JSON.stringify(users));
+    }
   }, [tasks, completedTasks]);
 
   const addTask = (text: string, deadline?: string) => setTasks([...tasks, { text, completed: false, deadline }]);

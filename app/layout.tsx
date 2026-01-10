@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { TaskProvider } from './context/TaskContext';
+import UserBar from './components/UserBar';
 
 
 const geistSans = Geist({
@@ -27,9 +28,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ro">
       <body>
         <TaskProvider>
+          <UserBar />
           {children}
         </TaskProvider>
       </body>
     </html>
   );
 }
+
+// ...existing code...

@@ -1,14 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BackButton from '../components/BackButton';
 
 // Simplu: datele se stochează în localStorage (nu e pentru producție)
+
 export default function LoginPage() {
   const [isRegister, setIsRegister] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setLoggedInUser(localStorage.getItem('producty-current-user'));
+    }
+  }, []);
 
   const handleRegister = () => {
     if (!username || !password) {
@@ -20,7 +28,7 @@ export default function LoginPage() {
       setMessage('Acest utilizator există deja!');
       return;
     }
-    users[username] = { password };
+    users[username] = { password, data: { tasks: [], materials: [], activity: [] } };
     localStorage.setItem('producty-users', JSON.stringify(users));
     setMessage('Cont creat cu succes! Te poți loga.');
     setIsRegister(false);
@@ -30,12 +38,40 @@ export default function LoginPage() {
     const users = JSON.parse(localStorage.getItem('producty-users') || '{}');
     if (users[username] && users[username].password === password) {
       localStorage.setItem('producty-current-user', username);
+      // Marchează loginul și ora de început sesiune
+      const now = new Date().toISOString();
+      if (!users[username].activity) users[username].activity = [];
+      users[username].activity.push({ type: 'login', time: now });
+      users[username].lastLogin = now;
+      users[username].sessionStart = Date.now();
+      localStorage.setItem('producty-users', JSON.stringify(users));
       setMessage('Logare reușită!');
-      // Poți redirecționa sau salva stare globală aici
+      window.location.reload();
     } else {
       setMessage('Date incorecte!');
     }
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('producty-current-user');
+    setLoggedInUser(null);
+    window.location.reload();
+  };
+
+  if (loggedInUser) {
+    return (
+      <div className="container">
+        <h1 className="title">Contul tău</h1>
+        <BackButton />
+        <div style={{ margin: '40px auto', maxWidth: 350, background: '#1e1e2f', borderRadius: 12, padding: 32, boxShadow: '0 2px 12px #a259e655', textAlign: 'center' }}>
+          <div style={{ fontSize: 22, fontWeight: 600, marginBottom: 18, color: '#a259e6' }}>Salut, {loggedInUser}!</div>
+          <button className="add-button" onClick={handleLogout} style={{ marginBottom: 10 }}>
+            Log out
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
