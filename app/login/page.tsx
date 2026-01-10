@@ -24,7 +24,7 @@ export default function LoginPage() {
       return;
     }
     try {
-      const res = await fetch('http://localhost:4000/api/register', {
+      const res = await fetch('https://producty.onrender.com/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -43,7 +43,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('http://localhost:4000/api/login', {
+      const res = await fetch('https://producty.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })

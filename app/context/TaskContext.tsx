@@ -26,7 +26,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
       setCompletedTasks([]);
       return;
     }
-    fetch(`http://localhost:4000/api/tasks?username=${encodeURIComponent(currentUser)}`)
+    fetch(`https://producty.onrender.com/api/tasks?username=${encodeURIComponent(currentUser)}`)
       .then(res => res.json())
       .then(data => {
         if (data.tasks) {
@@ -49,7 +49,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     const currentUser = localStorage.getItem('producty-current-user');
     if (!currentUser) return;
     const allTasks = [...tasks, ...completedTasks];
-    fetch('http://localhost:4000/api/tasks', {
+    fetch('https://producty.onrender.com/api/tasks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: currentUser, tasks: allTasks })

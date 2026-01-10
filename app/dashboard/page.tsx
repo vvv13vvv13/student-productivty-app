@@ -13,7 +13,7 @@ export default function DashboardPage() {
       setLoading(false);
       return;
     }
-    fetch('http://localhost:4000/api/dashboard')
+    fetch('https://producty.onrender.com/api/dashboard')
       .then(res => res.json())
       .then(data => {
         setUsers(data.users || []);
